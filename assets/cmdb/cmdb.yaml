@@ -1,0 +1,5 @@
+systemCode: upp-concepts-rw-s3
+name: Concepts R/W S3
+description: Writing JSON representations of concepts to S3.
+lifecycleStage: Testing
+troubleshooting: MD://troubleshooting.md

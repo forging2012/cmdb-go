@@ -1,0 +1,28 @@
+serviceTier: Bronze
+lifecycleStage: Analysis
+architectureDiagram: https://www.lucidchart.com/documents/view/aea75fa6-8a96-42f9-88f0-34beac12b708
+monitoring:
+- name: Prod UK healthcheck
+  link: https://prod-uk-up.ft.com/__health
+- name: Prod US healthcheck
+  link: https://prod-us-up.ft.com/__health
+moreInformation:
+- name: Cluster configuration
+  link: https://github.com/Financial-Times/coco-provisioner
+- name: Service configuration
+  link: https://github.com/Financial-Times/up-service-files
+programme:
+  contact:
+    - dataItemID: platforms-content
+primaryContact:
+  contact:
+    - dataItemID: technicaloperations
+secondaryContact:
+  contact:
+    - dataItemID: universalpublishingplatform
+productOwner:
+  contact:
+    - dataItemID: stephenelson
+technicalLead:
+  contact:
+    - dataItemID: sarahwells
