@@ -42,7 +42,8 @@ func (s *System) ImportMarkdown(mdFile string, parentSystem string) string {
 
 	input, err := ioutil.ReadFile(truePath)
 	if err != nil {
-		panic(err)
+		logrus.Error(err)
+		return mdFile
 	}
 	output := blackfriday.MarkdownCommon(input)
 	return string(output)

@@ -3,3 +3,5 @@ name: Concepts R/W S3
 description: Writing JSON representations of concepts to S3.
 lifecycleStage: Testing
 troubleshooting: MD://troubleshooting.md
+gitRepository: https://github.com/Financial-Times/generic-rw-s3
+hostPlatform: AWS

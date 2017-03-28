@@ -46,43 +46,47 @@ func main() {
 
 		logrus.Infof("Connecting to %s", *cmdbEndpoint)
 
-		globalSystem := loadSystem(*globalSystemFile)
-		system := loadSystem(*systemFile)
-
+		globalSystem, err := loadSystem(*globalSystemFile)
+		if err != nil {
+			logrus.Fatalf("Error loading %s: %s", *globalSystemFile, err)
+		}
+		system, err := loadSystem(*systemFile)
+		if err != nil {
+			logrus.Fatalf("Error loading %s: %s", *systemFile, err)
+		}
 		finalSystem := combineSystems(globalSystem, system)
 		logrus.Debugf("Final system: %v", finalSystem)
 
 		cmdb, err := cmdb.NewClient(*cmdbEndpoint, *apiKey)
 		if err != nil {
-			panic(err)
+			logrus.Fatalf("Error creating cmdb client: %s", err)
 		}
 
 		cmdb.UpdateSystem(finalSystem)
 
 		logrus.Infof("Updated System %s", system.SystemCode)
-
 	}
 
 	app.Run(os.Args)
 }
 
-func loadSystem(f string) cmdb.System {
+func loadSystem(f string) (cmdb.System, error) {
 	logrus.Infof("Loading file %s", f)
 	file, err := ioutil.ReadFile(f)
 	if err != nil {
-		panic(err)
+		return cmdb.System{}, err
 	}
 
 	system := cmdb.System{}
 	err = yaml.Unmarshal(file, &system)
 	if err != nil {
-		panic(err)
+		return cmdb.System{}, err
 	}
 
 	system.Troubleshooting = system.ImportMarkdown(system.Troubleshooting, f)
 
 	logrus.Debug(system)
-	return system
+	return system, nil
 }
 
 func combineSystems(defaultSystem, overrideSystem cmdb.System) cmdb.System {
